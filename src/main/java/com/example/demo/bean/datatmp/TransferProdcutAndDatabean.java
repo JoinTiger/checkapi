@@ -278,5 +278,25 @@ public class TransferProdcutAndDatabean implements Serializable {
     }
 
 
+    public static List<Product> dataBeansToProducts(List<DataBean> dataBeans) {
+
+        List<Product> ret = new ArrayList<>();
+
+        for (DataBean dataBean : dataBeans) {
+            ret.add(dataBeanToProduct(dataBean));
+        }
+
+        return ret;
+    }
+
+    public static List<DataBean> productsToDataBeans(List<Product> products) {
+        List<DataBean> ret = new ArrayList<>();
+
+        for (Product product : products) {
+            ret.add(productToDataBean(product));
+        }
+
+        return ret;
+    }
 
 }

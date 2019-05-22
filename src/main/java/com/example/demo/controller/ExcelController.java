@@ -63,15 +63,27 @@ public class ExcelController {
 
     @GetMapping(value = "/excel/export")
     @ResponseBody
-    public String excelExport() throws JsonProcessingException {
+    public ResponseEntiry excelExport() {
 
-        List<Product> products = productService.findAll();
+        ResponseEntiry responseEntiry = new ResponseEntiry();
 
-        DataBean dataBean = TransferProdcutAndDatabean.productToDataBean(products.get(0));
+        try {
 
-        ObjectMapper mapper = new ObjectMapper();
+            List<Product> products = productService.findAll();
 
-        return mapper.writeValueAsString(dataBean);
+            List<DataBean> dataBeans = TransferProdcutAndDatabean.productsToDataBeans(products);
+
+            responseEntiry.setMsgCode(0);
+            responseEntiry.setMsgDesc("查询成功");
+            responseEntiry.setData(dataBeans);
+
+        } catch (Exception e) {
+            responseEntiry.setMsgCode(1);
+            responseEntiry.setMsgDesc(e.toString());
+        }
+
+        return responseEntiry;
+
     }
 
 
