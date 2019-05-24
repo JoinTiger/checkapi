@@ -4,14 +4,13 @@ import com.example.demo.bean.Product;
 import com.example.demo.bean.datatmp.DataBean;
 import com.example.demo.bean.datatmp.TransferProdcutAndDatabean;
 import com.example.demo.bean.response.ResponseEntiry;
+import com.example.demo.logger.WaLogger;
 import com.example.demo.service.ProductService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -76,8 +75,9 @@ public class ExcelController {
             responseEntiry.setMsgCode(0);
             responseEntiry.setMsgDesc("查询成功");
             responseEntiry.setData(dataBeans);
-
+            throw new Exception("hello logging exception");
         } catch (Exception e) {
+            WaLogger.logger.warn(e.toString());
             responseEntiry.setMsgCode(1);
             responseEntiry.setMsgDesc(e.toString());
         }
