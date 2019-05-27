@@ -2,6 +2,7 @@ package com.example.demo.bean.datatmp;
 
 import com.example.demo.bean.Motor;
 import com.example.demo.bean.Product;
+import com.example.demo.bean.Servo;
 
 import java.io.Serializable;
 import java.util.*;
@@ -96,7 +97,11 @@ public class TransferProdcutAndDatabean implements Serializable {
 
         /********************3.servos*************************/
 
-        dataBean.setServos(product.getServos());
+        List<Servo> servos = product.getServos();
+
+        Collections.sort(servos, (Servo s1, Servo s2) -> (s1.getAxisName().compareTo(s2.getAxisName())));
+
+        dataBean.setServos(servos);
 
 
         /***********************4.elecDatas************************************/
@@ -153,6 +158,11 @@ public class TransferProdcutAndDatabean implements Serializable {
 
             elecDatas.add(elecData);
         }
+
+        Collections.sort(elecDatas,
+                (ElecData e1, ElecData e2) ->
+                        (e1.getAxServo().getAxisName().compareTo(
+                                e2.getAxServo().getAxisName())));
 
         dataBean.setElecDatas(elecDatas);
 

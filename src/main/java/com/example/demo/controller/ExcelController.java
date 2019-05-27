@@ -46,9 +46,11 @@ public class ExcelController {
 
             productService.save(product);
 
+
+
             responseEntiry.setMsgCode(0);
             responseEntiry.setMsgDesc("录入成功");
-            responseEntiry.setData(dataBean);
+            responseEntiry.setData(product);
         } catch (Exception e) {
             responseEntiry.setMsgCode(1);
             responseEntiry.setMsgDesc(e.toString());
