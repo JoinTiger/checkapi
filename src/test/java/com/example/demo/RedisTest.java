@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +51,15 @@ public class RedisTest {
 
     @Test
     public void test01() {
+        List<Integer> lists = new ArrayList<>();
+
+        lists.add(1);
+        lists.add(2);
+        lists.add(3);
+        lists.add(4);
+
+        System.out.println(lists.get(3));
+
 
     }
 

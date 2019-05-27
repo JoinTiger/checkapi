@@ -4,8 +4,7 @@ import com.example.demo.bean.Motor;
 import com.example.demo.bean.Product;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class TransferProdcutAndDatabean implements Serializable {
 
@@ -76,8 +75,6 @@ public class TransferProdcutAndDatabean implements Serializable {
     public static DataBean productToDataBean(Product product) {
         DataBean dataBean = new DataBean();
 
-        //TODO
-
 
         /********************1.uploadTime----loginname*************************/
         dataBean.setUploadTime(product.getUploadTime());
@@ -102,180 +99,68 @@ public class TransferProdcutAndDatabean implements Serializable {
         dataBean.setServos(product.getServos());
 
 
-        List<ElecData> elecDatas = new ArrayList<>();
+        /***********************4.elecDatas************************************/
 
         List<Motor> motors = product.getMotors();
 
-//        private AxServo axServo;
-//
-//        private List<NameMinMaxAveCur> nameMinMaxAveCurs = new ArrayList<>();
+        List<ElecData> elecDatas = new ArrayList<>();
 
-        AxServo axServoX = null;
-        AxServo axServoY = null;
-        AxServo axServoZ = null;
-        AxServo axServoA = null;
+        List<AxServo> axServos = new ArrayList<>();
 
-        List<NameMinMaxAveCur> nameMinMaxAveCurXs = null;
-        List<NameMinMaxAveCur> nameMinMaxAveCurYs = null;
-        List<NameMinMaxAveCur> nameMinMaxAveCurZs = null;
-        List<NameMinMaxAveCur> nameMinMaxAveCurAs = null;
+        List<List<NameMinMaxAveCur>> nameMinMaxAveCurss = new ArrayList<>();
 
+        Map<String, Integer> map = new HashMap<>();
 
+        for(Motor motor :motors) {
 
-        for (Motor motor : motors) {
+            String axisName = motor.getAxisName();
 
-            switch (motor.getAxisName()) {
-
-                case "X":
-                    if(axServoX == null) {
-
-                        axServoX = new AxServo();
-                        nameMinMaxAveCurXs = new ArrayList<>();
-
-                        axServoX.setAxisName(motor.getAxisName());
-                        axServoX.setElecId(motor.getElecId());
-                        axServoX.setElecModel(motor.getElecModel());
-                        axServoX.setServoId(motor.getServoId());
-                        axServoX.setServoModel(motor.getServoModel());
-
-                    }
-
-                    NameMinMaxAveCur nameMinMaxAveCurX = new NameMinMaxAveCur();
-
-                    nameMinMaxAveCurX.setName(motor.getElecName());
-                    nameMinMaxAveCurX.setAverage(motor.getAverage());
-                    nameMinMaxAveCurX.setCur(motor.getCur());
-                    nameMinMaxAveCurX.setMax(motor.getMax());
-                    nameMinMaxAveCurX.setMin(motor.getMin());
-
-                    nameMinMaxAveCurXs.add(nameMinMaxAveCurX);
-
-                    break;
-
-                case "Y":
-
-                    if(axServoY == null) {
-
-                        axServoY = new AxServo();
-                        nameMinMaxAveCurYs = new ArrayList<>();
-
-                        axServoY.setAxisName(motor.getAxisName());
-                        axServoY.setElecId(motor.getElecId());
-                        axServoY.setElecModel(motor.getElecModel());
-                        axServoY.setServoId(motor.getServoId());
-                        axServoY.setServoModel(motor.getServoModel());
-
-                    }
-
-                    NameMinMaxAveCur nameMinMaxAveCurY = new NameMinMaxAveCur();
-
-                    nameMinMaxAveCurY.setName(motor.getElecName());
-                    nameMinMaxAveCurY.setAverage(motor.getAverage());
-                    nameMinMaxAveCurY.setCur(motor.getCur());
-                    nameMinMaxAveCurY.setMax(motor.getMax());
-                    nameMinMaxAveCurY.setMin(motor.getMin());
-
-                    nameMinMaxAveCurYs.add(nameMinMaxAveCurY);
-
-                    break;
-
-                case "Z":
-                    if(axServoZ == null) {
-
-                        axServoZ = new AxServo();
-                        nameMinMaxAveCurZs = new ArrayList<>();
-
-                        axServoZ.setAxisName(motor.getAxisName());
-                        axServoZ.setElecId(motor.getElecId());
-                        axServoZ.setElecModel(motor.getElecModel());
-                        axServoZ.setServoId(motor.getServoId());
-                        axServoZ.setServoModel(motor.getServoModel());
-                    }
-
-
-                    NameMinMaxAveCur nameMinMaxAveCurZ = new NameMinMaxAveCur();
-
-                    nameMinMaxAveCurZ.setName(motor.getElecName());
-                    nameMinMaxAveCurZ.setAverage(motor.getAverage());
-                    nameMinMaxAveCurZ.setCur(motor.getCur());
-                    nameMinMaxAveCurZ.setMax(motor.getMax());
-                    nameMinMaxAveCurZ.setMin(motor.getMin());
-
-                    nameMinMaxAveCurZs.add(nameMinMaxAveCurZ);
-
-
-                    break;
-
-                case "A":
-                    if(axServoA == null) {
-
-                        axServoA = new AxServo();
-                        nameMinMaxAveCurAs = new ArrayList<>();
-
-                        axServoA.setAxisName(motor.getAxisName());
-                        axServoA.setElecId(motor.getElecId());
-                        axServoA.setElecModel(motor.getElecModel());
-                        axServoA.setServoId(motor.getServoId());
-                        axServoA.setServoModel(motor.getServoModel());
-
-                    }
-
-                    NameMinMaxAveCur nameMinMaxAveCurA = new NameMinMaxAveCur();
-
-                    nameMinMaxAveCurA.setName(motor.getElecName());
-                    nameMinMaxAveCurA.setAverage(motor.getAverage());
-                    nameMinMaxAveCurA.setCur(motor.getCur());
-                    nameMinMaxAveCurA.setMax(motor.getMax());
-                    nameMinMaxAveCurA.setMin(motor.getMin());
-
-                    nameMinMaxAveCurAs.add(nameMinMaxAveCurA);
-
-
-                    break;
+            if( !map.containsKey(axisName) ) {
+                map.put(axisName, map.size());
+                axServos.add(new AxServo());
+                nameMinMaxAveCurss.add(new ArrayList<>());
             }
 
+            int i = map.get(axisName).intValue();
+
+            AxServo axServo = axServos.get(i);
+            List<NameMinMaxAveCur> nameMinMaxAveCurs = nameMinMaxAveCurss.get(i);
+
+
+
+            axServo.setAxisName(motor.getAxisName());
+            axServo.setElecId(motor.getElecId());
+            axServo.setElecModel(motor.getElecModel());
+            axServo.setServoId(motor.getServoId());
+            axServo.setServoModel(motor.getServoModel());
+
+            NameMinMaxAveCur nameMinMaxAveCur = new NameMinMaxAveCur();
+
+            nameMinMaxAveCur.setName(motor.getElecName());
+            nameMinMaxAveCur.setAverage(motor.getAverage());
+            nameMinMaxAveCur.setCur(motor.getCur());
+            nameMinMaxAveCur.setMax(motor.getMax());
+            nameMinMaxAveCur.setMin(motor.getMin());
+
+            nameMinMaxAveCurs.add(nameMinMaxAveCur);
 
         }
 
-        if(axServoX != null) {
+        for(int i = 0; i < axServos.size(); i++) {
             ElecData elecData = new ElecData();
-            elecData.setAxServo(axServoX);
-            elecData.setNameMinMaxAveCurs(nameMinMaxAveCurXs);
+            elecData.setAxServo(axServos.get(i));
+            elecData.setNameMinMaxAveCurs(nameMinMaxAveCurss.get(i));
 
             elecDatas.add(elecData);
         }
 
-
-        if(axServoY != null) {
-            ElecData elecData = new ElecData();
-            elecData.setAxServo(axServoY);
-            elecData.setNameMinMaxAveCurs(nameMinMaxAveCurYs);
-
-            elecDatas.add(elecData);
-        }
-
-        if(axServoZ != null) {
-            ElecData elecData = new ElecData();
-            elecData.setAxServo(axServoZ);
-            elecData.setNameMinMaxAveCurs(nameMinMaxAveCurZs);
-
-            elecDatas.add(elecData);
-        }
-
-
-        if(axServoA != null) {
-            ElecData elecData = new ElecData();
-            elecData.setAxServo(axServoA);
-            elecData.setNameMinMaxAveCurs(nameMinMaxAveCurAs);
-
-            elecDatas.add(elecData);
-        }
-
-        /***********************4.elecDatas************************************/
         dataBean.setElecDatas(elecDatas);
 
         return dataBean;
     }
+
+
+
 
 
     public static List<Product> dataBeansToProducts(List<DataBean> dataBeans) {

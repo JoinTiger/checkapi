@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ServoRepository extends JpaRepository<Servo, Long> {
 
-    public List<Servo> findByProductId(Long id);
+    public List<Servo> findByProductId(Long productId);
 
 
 }
