@@ -10,4 +10,6 @@ public interface ServoRepository extends JpaRepository<Servo, Long> {
     public List<Servo> findByProductId(Long productId);
 
 
+
+
 }

@@ -1,11 +1,15 @@
 package com.example.demo;
 
+import com.example.demo.bean.Motor;
 import com.example.demo.bean.Product;
 import com.example.demo.bean.User;
+import com.example.demo.bean.result.ElecAtrribueSummary;
 import com.example.demo.redis.SequenceUtils;
 import com.example.demo.repository.*;
+import com.example.demo.service.MotorService;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +50,9 @@ public class RedisTest {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MotorService motorService;
+
     @Test
     public void test() {
         Date date = new Date();
@@ -67,6 +74,14 @@ public class RedisTest {
 
         System.out.println(userService.findFirstByUsername("re").getPassword());
 
+    }
+
+    @Test
+    public void test02() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+
+        List<ElecAtrribueSummary> atrributeByElecModel = motorService.findAtrributeByElecModel("DianJi001");
+        System.out.println(mapper.writeValueAsString(atrributeByElecModel));
     }
 
 }
