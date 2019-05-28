@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.bean.Motor;
 import com.example.demo.bean.Product;
 import com.example.demo.bean.datatmp.DataBean;
 import com.example.demo.bean.datatmp.TransferProdcutAndDatabean;
 import com.example.demo.bean.response.ResponseEntiry;
+import com.example.demo.bean.result.ElecAtrribueSummary;
 import com.example.demo.logger.WaLogger;
+import com.example.demo.service.MotorService;
 import com.example.demo.service.ProductService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,16 +22,8 @@ public class ExcelController {
     @Autowired
     private ProductService productService;
 
-
-    @RequestMapping("/export")
-    public String exportPage(){
-        return "export";
-    }
-    @RequestMapping("/")
-    public String importPage(){
-        return "import";
-    }
-
+    @Autowired
+    private MotorService motorService;
 
     @PostMapping("/excel/import")
     @ResponseBody
@@ -88,8 +83,34 @@ public class ExcelController {
 
     }
 
+    @PostMapping(value = "/elecData/export")
+    @ResponseBody
+    public ResponseEntiry exportElecAtrributes(@RequestBody String json) {
+        ResponseEntiry responseEntiry = new ResponseEntiry();
+        try {
+
+            ObjectMapper mapper = new ObjectMapper();
+
+            Motor motor = mapper.readValue(json, new TypeReference<Motor>(){});
+
+            System.out.println(motor.getElecModel());
+
+            List<ElecAtrribueSummary> atrributeByElecModel = motorService.findAtrributeByElecModel(motor.getElecModel());
+
+            responseEntiry.setMsgCode(0);
+            responseEntiry.setMsgDesc("查询成功");
+            responseEntiry.setData(atrributeByElecModel);
 
 
+        } catch (Exception e) {
+            WaLogger.logger.warn(e.toString());
+            responseEntiry.setMsgCode(1);
+            responseEntiry.setMsgDesc(e.toString());
+        }
+
+
+        return responseEntiry;
+    }
 
 
 }
