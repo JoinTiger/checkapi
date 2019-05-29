@@ -41,8 +41,6 @@ public class ExcelController {
 
             productService.save(product);
 
-
-
             responseEntiry.setMsgCode(0);
             responseEntiry.setMsgDesc("录入成功");
             responseEntiry.setData(product);
@@ -93,7 +91,6 @@ public class ExcelController {
 
             Motor motor = mapper.readValue(json, new TypeReference<Motor>(){});
 
-            System.out.println(motor.getElecModel());
 
             List<ElecAtrribueSummary> atrributeByElecModel = motorService.findAtrributeByElecModel(motor.getElecModel());
 

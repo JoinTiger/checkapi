@@ -1,5 +1,6 @@
 package com.example.demo.bean.datatmp;
 
+
 public class NameMinMaxAveCur {
 
     private static final long serialVersionUID = -627597604350146446L;
@@ -7,8 +8,11 @@ public class NameMinMaxAveCur {
     private String name;
 
     private Double min;
+
     private Double max;
+
     private Double average;
+
     private Double cur;
 
 
