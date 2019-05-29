@@ -1,5 +1,6 @@
 package com.example.demo.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "product")
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 4963359130561432864L;
@@ -27,11 +28,16 @@ public class Product implements Serializable {
 
     private Integer macAxNum;
 
+    private Integer passFlag;
+
     private String macModel;
 
     private String macNO;
 
     private String macSN;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date macProductTime;
 
     private String ipcCode;
 
@@ -55,14 +61,16 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String batchId, Long uploadTime, Integer version, Integer macAxNum, String macModel, String macNO, String macSN, String ipcCode, String contractCode, String customerName, String loginName, NcVer ncVer, List<Servo> servos, List<Motor> motors) {
+    public Product(String batchId, Long uploadTime, Integer version, Integer macAxNum, Integer passFlag, String macModel, String macNO, String macSN, Date macProductTime, String ipcCode, String contractCode, String customerName, String loginName, NcVer ncVer, List<Servo> servos, List<Motor> motors) {
         this.batchId = batchId;
         this.uploadTime = uploadTime;
         this.version = version;
         this.macAxNum = macAxNum;
+        this.passFlag = passFlag;
         this.macModel = macModel;
         this.macNO = macNO;
         this.macSN = macSN;
+        this.macProductTime = macProductTime;
         this.ipcCode = ipcCode;
         this.contractCode = contractCode;
         this.customerName = customerName;
@@ -71,6 +79,7 @@ public class Product implements Serializable {
         this.servos = servos;
         this.motors = motors;
     }
+
 
     public Long getId() {
         return id;
@@ -112,6 +121,14 @@ public class Product implements Serializable {
         this.macAxNum = macAxNum;
     }
 
+    public Integer getPassFlag() {
+        return passFlag;
+    }
+
+    public void setPassFlag(Integer passFlag) {
+        this.passFlag = passFlag;
+    }
+
     public String getMacModel() {
         return macModel;
     }
@@ -134,6 +151,14 @@ public class Product implements Serializable {
 
     public void setMacSN(String macSN) {
         this.macSN = macSN;
+    }
+
+    public Date getMacProductTime() {
+        return macProductTime;
+    }
+
+    public void setMacProductTime(Date macProductTime) {
+        this.macProductTime = macProductTime;
     }
 
     public String getIpcCode() {

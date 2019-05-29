@@ -20,9 +20,13 @@ public class TransferProdcutAndDatabean implements Serializable {
         product.setVersion(dataBean.getVersion());
         product.setMacAxNum(dataBean.getMacAxNum());
 
+        product.setPassFlag(dataBean.getPassFlag());
+
         product.setMacModel(dataBean.getMacModel());
         product.setMacNO(dataBean.getMacNO());
         product.setMacSN(dataBean.getMacSN());
+
+        product.setMacProductTime(dataBean.getMacProductTime());
 
         product.setIpcCode(dataBean.getIpcCode());
         product.setContractCode(dataBean.getContractCode());
@@ -82,9 +86,13 @@ public class TransferProdcutAndDatabean implements Serializable {
         dataBean.setVersion(product.getVersion());
         dataBean.setMacAxNum(product.getMacAxNum());
 
+        dataBean.setPassFlag(product.getPassFlag());
+
         dataBean.setMacModel(product.getMacModel());
         dataBean.setMacNO(product.getMacNO());
         dataBean.setMacSN(product.getMacSN());
+
+        dataBean.setMacProductTime(product.getMacProductTime());
 
         dataBean.setIpcCode(product.getIpcCode());
         dataBean.setContractCode(product.getContractCode());

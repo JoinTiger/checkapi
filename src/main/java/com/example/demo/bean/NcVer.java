@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "NcVer")
+@Table(name = "ncVer")
 public class NcVer implements Serializable {
 
     private static final long serialVersionUID = -2761918922382521922L;
@@ -73,7 +73,6 @@ public class NcVer implements Serializable {
         this.testFpgaVer = testFpgaVer;
         this.productId = productId;
     }
-
 
     public Long getId() {
         return id;

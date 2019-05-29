@@ -1,12 +1,15 @@
 package com.example.demo.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-@Table(name = "Servo")
+@Table(name = "servo")
 public class Servo implements Serializable {
 
     private static final long serialVersionUID = 1031458297022846820L;
@@ -28,21 +31,26 @@ public class Servo implements Serializable {
 
     private String testServoVer;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date servoProductTime;
+
     @JsonIgnore
     private Long productId;
 
     public Servo() {
     }
 
-    public Servo(String servoId, String axisName, String servoType, String testServoType, String servoVer, String testServoVer, Long productId) {
+    public Servo(String servoId, String axisName, String servoType, String testServoType, String servoVer, String testServoVer, Date servoProductTime, Long productId) {
         this.servoId = servoId;
         this.axisName = axisName;
         this.servoType = servoType;
         this.testServoType = testServoType;
         this.servoVer = servoVer;
         this.testServoVer = testServoVer;
+        this.servoProductTime = servoProductTime;
         this.productId = productId;
     }
+
 
     public Long getId() {
         return id;
@@ -98,6 +106,14 @@ public class Servo implements Serializable {
 
     public void setTestServoVer(String testServoVer) {
         this.testServoVer = testServoVer;
+    }
+
+    public Date getServoProductTime() {
+        return servoProductTime;
+    }
+
+    public void setServoProductTime(Date servoProductTime) {
+        this.servoProductTime = servoProductTime;
     }
 
     public Long getProductId() {

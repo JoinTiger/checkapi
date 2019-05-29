@@ -3,10 +3,12 @@ package com.example.demo.bean.datatmp;
 
 import com.example.demo.bean.NcVer;
 import com.example.demo.bean.Servo;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DataBean implements Serializable {
@@ -19,11 +21,16 @@ public class DataBean implements Serializable {
 
     private Integer macAxNum;
 
+    private Integer passFlag;
+
     private String macModel;
 
     private String macNO;
 
     private String macSN;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date macProductTime;
 
     private String ipcCode;
 
@@ -45,13 +52,15 @@ public class DataBean implements Serializable {
     public DataBean() {
     }
 
-    public DataBean(Long uploadTime, Integer version, Integer macAxNum, String macModel, String macNO, String macSN, String ipcCode, String contractCode, String customerName, String loginName, NcVer ncVer, List<Servo> servos, List<ElecData> elecDatas) {
+    public DataBean(Long uploadTime, Integer version, Integer macAxNum, Integer passFlag, String macModel, String macNO, String macSN, Date macProductTime, String ipcCode, String contractCode, String customerName, String loginName, NcVer ncVer, List<Servo> servos, List<ElecData> elecDatas) {
         this.uploadTime = uploadTime;
         this.version = version;
         this.macAxNum = macAxNum;
+        this.passFlag = passFlag;
         this.macModel = macModel;
         this.macNO = macNO;
         this.macSN = macSN;
+        this.macProductTime = macProductTime;
         this.ipcCode = ipcCode;
         this.contractCode = contractCode;
         this.customerName = customerName;
@@ -86,6 +95,14 @@ public class DataBean implements Serializable {
         this.macAxNum = macAxNum;
     }
 
+    public Integer getPassFlag() {
+        return passFlag;
+    }
+
+    public void setPassFlag(Integer passFlag) {
+        this.passFlag = passFlag;
+    }
+
     public String getMacModel() {
         return macModel;
     }
@@ -108,6 +125,14 @@ public class DataBean implements Serializable {
 
     public void setMacSN(String macSN) {
         this.macSN = macSN;
+    }
+
+    public Date getMacProductTime() {
+        return macProductTime;
+    }
+
+    public void setMacProductTime(Date macProductTime) {
+        this.macProductTime = macProductTime;
     }
 
     public String getIpcCode() {
