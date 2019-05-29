@@ -80,7 +80,7 @@ public class RedisTest {
     public void test02() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
 
-        List<ElecAtrribueSummary> atrributeByElecModel = motorService.findAtrributeByElecModel("DianJi001");
+        List<ElecAtrribueSummary> atrributeByElecModel = motorService.findAtrributeByElecModel("402F");
         System.out.println(mapper.writeValueAsString(atrributeByElecModel));
     }
 
