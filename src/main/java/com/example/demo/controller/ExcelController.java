@@ -11,11 +11,14 @@ import com.example.demo.service.MotorService;
 import com.example.demo.service.ProductService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@Api(value = "检测工具导入、导出数据", description = "检测工具导入、导出数据操作 API", position = 100, protocols = "http")
 @Controller
 public class ExcelController {
 
@@ -25,6 +28,7 @@ public class ExcelController {
     @Autowired
     private MotorService motorService;
 
+    @ApiOperation(value = "导入数据", notes = "一次导入一条数据")
     @PostMapping("/excel/import")
     @ResponseBody
     public ResponseEntiry excelImport(@RequestBody String json) {
@@ -54,7 +58,7 @@ public class ExcelController {
 
     }
 
-
+    @ApiOperation(value = "导出所有数据", notes = "一次导出所有数据")
     @GetMapping(value = "/excel/export")
     @ResponseBody
     public ResponseEntiry excelExport() {
@@ -85,6 +89,7 @@ public class ExcelController {
 
     }
 
+    @ApiOperation(value = "导入出电机数据", notes = "根据elecModel导出电机各属性值")
     @PostMapping(value = "/elecData/export")
     @ResponseBody
     public ResponseEntiry exportElecAtrributes(@RequestBody String json) {
