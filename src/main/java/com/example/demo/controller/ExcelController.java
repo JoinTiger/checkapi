@@ -67,6 +67,10 @@ public class ExcelController {
 
             List<DataBean> dataBeans = TransferProdcutAndDatabean.productsToDataBeans(products);
 
+            if(dataBeans.size() == 0) {
+                throw new Exception("no data!");
+            }
+
             responseEntiry.setMsgCode(0);
             responseEntiry.setMsgDesc("查询成功");
             responseEntiry.setData(dataBeans);
@@ -93,6 +97,10 @@ public class ExcelController {
 
 
             List<ElecAtrribueSummary> atrributeByElecModel = motorService.findAtrributeByElecModel(motor.getElecModel());
+
+            if(atrributeByElecModel.size() == 0) {
+                throw new Exception("no data!");
+            }
 
             responseEntiry.setMsgCode(0);
             responseEntiry.setMsgDesc("查询成功");

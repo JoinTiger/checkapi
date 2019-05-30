@@ -62,6 +62,11 @@ public class UserController {
 
             User userData = userService.findFirstByUsername(user.getUsername());
 
+            if(null == userData) {
+                throw new Exception("no data!");
+            }
+
+
             responseEntiry.setMsgCode(0);
             responseEntiry.setMsgDesc("查询成功");
             responseEntiry.setData(userData);
